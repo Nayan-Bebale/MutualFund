@@ -1,0 +1,49 @@
+{% load static %}
+{% include 'newHeader.html' %}
+<div id="wrapper">
+
+    <!-- Main -->
+        <section id="main" class="wrapper">
+            <div class="inner">
+                
+                <h1 class="major">Consistent Funds</h1>
+                <div style="float: right;" >
+                    <form method="get" style="display: flex;">
+                        <input type="text" id="search" name="search" placeholder="Search here" value="{{ request.GET.search }}"> <button type="submit" style="margin-left: 8px;">Search</button>
+                    </form></div>
+                
+                <h2 style="display: inline;">Top Mutual Funds</h2><span><h3 style="display: inline;">- Consistent Funds</h3></span>
+
+                <p>Mutual Funds for market Risk</p>
+                <!-- <span class="image fit"><img src="{% static 'assets/images/download.jpg' %}" alt="" /></span>                 -->
+                        
+            </div>
+            <section class="wrapper" style="margin-left: 50px; margin-right: 50px;">
+                <div class="table-wrapper">
+
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <th>Scheme Name</th>
+                                <th>1Y (%)</th>
+                                <th>3Y (%)</th>
+                                <th>5Y (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fund in filtered_schemes %}
+                                <tr>
+                                    <td>{{fund.scheme_name}}</td>
+                                    <td>{{fund.returns_1yr}}</td>
+                                    <td>{{fund.returns_3yr}}</td>
+                                    <td>{{fund.returns_5yr}}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </section>
+
+</div>
+{% include 'newFooter.html' %}

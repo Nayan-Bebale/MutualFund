@@ -1,0 +1,171 @@
+{% load static %}
+
+{% include 'header.html' %}
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>SmartSaver</h1>
+							<p>Best Mutual Funds For You.</p>
+							<ul class="actions">
+								<li><a href="{% url 'mutualApp:learn_more' %}" class="button scrolly">Learn more</a></li>
+							</ul>
+						</div>
+					</section>
+
+				<!-- One -->
+					<section id="one" style="padding: 15px 10px 10px 10px;">
+						<section>
+							<div class="table-wrapper">
+								<h2 style="display: inline;">Top Mutual Funds</h2><span><h3 style="display: inline;">- Consistent Funds</h3></span>
+
+								<p>Mutual Funds for market Risk</p>
+								<table class="alt">
+									<thead>
+										<tr>
+											<th>Scheme Name</th>
+											<th>1Y (%)</th>
+											<th>3Y (%)</th>
+											<th>5Y (%)</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for fund in top_5_schemes %}
+											<tr>
+												<td>{{fund.scheme_name}}</td>
+												<td>{{fund.returns_1yr}}</td>
+												<td>{{fund.returns_3yr}}</td>
+												<td>{{fund.returns_5yr}}</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+								<ul class="actions">
+									<li><a href="{% url 'mutualApp:consistent_returns' %}" class="button large">Watch more</a></li>
+									
+								</ul>
+							</div>
+						</section>
+						
+					</section>
+				<!-- Two -->
+				<section id="two" class="wrapper style3 fade-up">
+					<div class="inner">
+						<div style="display: flex; justify-content: space-between;">
+						<h2>Recommended Funds</h2>
+						<form method="get" action="{% url 'index' %}"> 
+							<div class="col-12" style="display: flex;">
+								<select name="demo-category" id="demo-category">
+									<option value="">- Category -</option>
+									<option value="high">High</option>
+									<option value="low">Low</option>
+									<option value="medium">Medium</option>
+								</select>
+								<button type="submit" style="margin-left: 8px;">Get Recomment</button>
+							</div>
+						</form>
+						
+					</div>
+						<div class="features">
+							{% if recommended_funds %}
+								{% for fund in recommended_funds %}
+									<section>
+										<span class="icon solid major fa-code"></span>
+										<h3>{{ fund }}</h3>
+									</section>
+								{% endfor %}
+							{% else %}
+								<section>
+									<span class="icon solid major fa-code"></span>
+									<h3>Risk Tolrance</h3>
+									<p>Please select your risk tolerance to get recommendations.</p>
+								</section>
+							{% endif %}	
+						</div>
+		
+					</div>
+				</section>
+
+
+				<!-- Three -->
+				<section id="three" class="wrapper style1 fade-up">
+					<div class="inner">
+						<h2></h2>
+		
+						<div class="split style1">
+							<section>
+								<div class="calculator">
+									<h2 class="calculator">Income Spite Calculator</h2>
+									<div>
+										<label for="income">Total Income:</label>
+										<input type="number" id="income" placeholder="Enter total income"
+											style="background-color: rgb(27, 37, 90); border-radius: 10px;">
+									</div>
+									<div style="margin-top: 8px;">
+										<button onclick="calculate()">Calculate</button>
+									</div>
+									<div id="results"></div>
+								</div>
+		
+		
+							</section>
+							<section >
+								<div class="container">
+									<h1>SIP Calculator</h1>
+									<div class="input-group">
+										<label for="investment">Investment Amount per Month (₹)</label>
+										<input style="background-color: rgb(27, 37, 90); border-radius: 10px;" type="number" id="investment" placeholder="Enter amount">
+									</div>
+									<div class="input-group">
+										<label for="duration">SIP Duration (Years)</label>
+										<input style="background-color: rgb(27, 37, 90); border-radius: 10px;" type="number" id="duration" placeholder="Enter duration">
+									</div>
+									<div class="input-group">
+										<label for="return">Expected Annual Return (%)</label>
+										<input style="background-color: rgb(27, 37, 90); border-radius: 10px;" type="number" id="return" placeholder="Enter return">
+									</div>
+									<button onclick="calculateSIP()">Calculate</button>
+									<div id="result"></div>
+								</div>
+							</section>
+						</div>
+					</div>
+				</section>
+
+				<!-- Three -->
+				<section id="four" class="wrapper style3 fade-up">
+					<div class="inner">
+						<div style="display: flex; justify-content: space-between;">
+							<h2>Low Risk Investment</h2>
+						</div>
+						<div class="features">
+								{% for fund in highest_5yr_returns %}
+									<section>
+										<span class="icon solid major fa-code"></span>
+										<h3>{{ fund }}</h3>
+									</section>
+								{% endfor %}
+						</div>
+
+						<div style="display: flex; justify-content: space-between;">
+							<h2>High Risk Investment</h2>
+						</div>
+						<div class="features">
+								{% for fund in lowest_5yr_returns %}
+									<section>
+										<span class="icon solid major fa-code"></span>
+										<h3>{{ fund }}</h3>
+									</section>
+								{% endfor %}
+						</div>
+		
+					</div>
+				</section>
+
+			</div>
+
+
+{% include 'footer.html' %}
