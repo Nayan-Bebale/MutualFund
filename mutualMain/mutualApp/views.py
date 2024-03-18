@@ -86,3 +86,47 @@ def consistent_returns(request):
 def learn_more(request):
     template_name = "generic.html"
     return render(request, template_name)
+
+
+def calculate_risk_level(age, salary):
+    if age >= 18 and age <= 30:
+        if salary >= 10000 and salary <= 15000:
+            return "High Risk"
+        elif salary > 15000 and salary <= 30000:
+            return "Medium Risk"
+        elif salary > 30000 and salary <= 50000:
+            return "Low Risk"
+        else:
+            return "Unknown Risk"
+    elif age > 30 and age <= 45:
+        if salary >= 15000 and salary <= 30000:
+            return "High Risk"
+        elif salary > 30000 and salary <= 50000:
+            return "Medium Risk"
+        elif salary > 50000:
+            return "Low Risk"
+        else:
+            return "Unknown Risk"
+    elif age > 45:
+        if salary >= 30000 and salary <= 50000:
+            return "High Risk"
+        elif salary > 50000:
+            return "Medium Risk"
+        else:
+            return "Unknown Risk"
+    else:
+        return "Unknown Risk"
+    
+
+
+def addCalculatorAge(request):
+    if request.method == 'POST':
+        age = int(request.POST.get('age', 0))
+        print(age)
+        salary = float(request.POST.get('salary', 0))
+        risk_level = calculate_risk_level(age, salary)
+        print(risk_level)
+        return render(request, 'newAgeCal.html', {'age': age, 'salary': salary, 'risk_level': risk_level})
+    
+    template_name = "newAgeCal.html"
+    return render(request, template_name)

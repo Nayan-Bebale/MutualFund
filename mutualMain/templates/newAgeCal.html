@@ -1,0 +1,38 @@
+{% include 'newHeader.html' %}
+<section id="three" class="wrapper style1 fade-up">
+    <div class="inner">
+        <h2></h2>
+
+        <div class="split style1">
+            <section>
+                <div class="calculator">
+                    <h2 class="calculator">Income Spite Calculator</h2>
+                    <!-- calculator.html -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <div>
+                            <label for="age">Age:</label>
+                            <input type="number" id="age" name="age" placeholder="Enter age"
+                                style="background-color: rgb(27, 37, 90); border-radius: 10px;">
+                        </div>
+                        <div>
+                            <label for="salary">Salary:</label>
+                            <input type="number" id="salary" name="salary" placeholder="Enter salary"
+                                style="background-color: rgb(27, 37, 90); border-radius: 10px;">
+                        </div>
+                        <div style="margin-top: 8px;">
+                            <button type="submit">Calculate</button>
+                        </div>
+                    </form>
+
+                    <!-- result.html -->
+<p>Based on age {{ age }} and salary {{ salary }}, the risk level is: {{ risk_level }}</p>
+
+                </div>
+
+
+            </section>
+        </div>
+    </div>
+</section>
+{% include 'newFooter.html' %}
